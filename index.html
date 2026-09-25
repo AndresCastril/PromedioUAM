@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Promedio UAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═════════════ HEADER ═════════════ -->
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <defs><linearGradient id="lg-bars" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6d28d9"/><stop offset="1" stop-color="#ddd6fe"/></linearGradient></defs>
+      <rect x="1" y="1" width="22" height="22" rx="6.5" fill="#0a0a0a" stroke="rgba(196,181,253,.35)"/>
+      <path d="M6.5 17v-3M10.2 17v-5.5M13.9 17V9M17.6 17V6.5" stroke="url(#lg-bars)" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span>Promedio <small>UAM</small></span>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button class="tab" role="tab" data-tab="calc" aria-selected="true">Calculadora</button>
+    <button class="tab" role="tab" data-tab="hist" aria-selected="false">Historial</button>
+  </nav>
+  <div class="sem-pill" id="sem-pill"></div>
+</header>
+
+<main class="app">
+  <section id="view-calc" role="tabpanel"></section>
+  <section id="view-hist" role="tabpanel" hidden></section>
+</main>
+
+<button class="fab" id="fab" hidden>
+  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.5"/></svg>
+  Cerrar semestre
+</button>
+
+<!-- ═════════════ VISTA COMPLETA DE MATERIAS ═════════════ -->
+<div class="sheet-backdrop" id="mat-overlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mat-title">
+    <div class="sheet-head">
+      <div>
+        <h2 id="mat-title">Materias</h2>
+        <p class="sheet-sub">Los cambios se guardan al instante. Cambiar la forma de evaluación borra las notas de esa materia.</p>
+      </div>
+      <button class="btn btn-primary btn-sm" data-mat="close">Listo</button>
+    </div>
+    <div class="sheet-body" id="mat-body"></div>
+  </div>
+</div>
+
+<!-- ═════════════ WIZARD NUEVO SEMESTRE ═════════════ -->
+<div class="sheet-backdrop" id="wizard" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="wiz-title">
+    <div class="sheet-head">
+      <div>
+        <h2 id="wiz-title">Nuevo semestre</h2>
+        <p class="sheet-sub" id="wiz-sub"></p>
+      </div>
+      <button class="icon-btn" data-wiz="cancel" aria-label="Cancelar">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <ol class="stepper" id="wiz-steps"></ol>
+    <div class="sheet-body" id="wiz-body"></div>
+    <div class="sheet-foot">
+      <p class="wiz-error" id="wiz-error" role="alert"></p>
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" data-wiz="cancel">Cancelar</button>
+        <button class="btn btn-secondary" data-wiz="back">Atrás</button>
+        <button class="btn btn-primary" data-wiz="next">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="import-input" accept="application/json,.json" hidden>
+
+<footer class="app-footer">
+  <p>Herramienta personal y no oficial para tantear cómo vas. No está afiliada a la universidad; sus resultados no reemplazan tu certificado de notas ni la información del sistema de Registro Académico.</p>
+  <p>Andrés Castrillón</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
